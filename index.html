@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>黑胶唱片画廊 - 演示</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" aria-hidden="true" class="reflection-filter">
+      <defs>
+        <filter
+          id="realistic-shadow"
+          x="-0.5"
+          y="-0.5"
+          width="2"
+          height="2"
+          color-interpolation-filters="sRGB"
+          primitiveUnits="objectBoundingBox"
+        >
+          <feGaussianBlur stdDeviation="0.05" />
+          <feOffset dx="0.025" dy="0.075" result="in" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.9713" />
+          <feDisplacementMap in="in" scale="0.075" yChannelSelector="R" />
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="0.6" />
+          </feComponentTransfer>
+          <feBlend in="SourceGraphic" />
+        </filter>
+      </defs>
+    </svg>
+
+    <div class="vinyl-carousel-wrapper">
+      <div class="boxes" id="carouselBoxes"></div>
+
+      <div class="controls" aria-hidden="true">
+        <button class="prev" type="button" aria-label="上一张">
+          <svg viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          </svg>
+        </button>
+        <button class="next" type="button" aria-label="下一张">
+          <svg viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="settings-panel" id="settingsPanel">
+      <div class="settings-panel__titlebar" id="panelTitleBar">
+        <span class="title"> 画廊设置 </span>
+        <button class="toggle" id="panelToggleBtn" type="button" aria-expanded="false" aria-label="展开面板">
+          <svg viewBox="0 0 20 20" width="14" height="14">
+            <line x1="2" y1="18" x2="18" y2="18" stroke-width="4" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="settings-panel__body" id="panelBody">
+        <section class="panel-section">
+          <h3>反射风格</h3>
+          <div class="reflection-options" id="reflectionOptions"></div>
+        </section>
+
+        <section class="panel-section">
+          <h3>纹理覆盖</h3>
+          <div class="texture-mode-options" id="textureModeOptions"></div>
+          <p class="panel-hint" id="randomHint">每个项目将应用随机纹理</p>
+          <div class="texture-grid" id="textureGrid"></div>
+        </section>
+      </div>
+    </div>
+
+    <div class="keyboard-wrapper">
+      <div class="keyboard">
+        <button
+          class="keyboard__key keyboard__key--meta keyboard__key--disabled keyboard__key--hidden"
+          type="button"
+          data-key="cmd"
+          disabled
+        >
+          <span class="keyboard__key-lines">
+            <svg class="keyboard__cmd keyboard__key-line--tr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                d="M5.7,10.3v2.3c0,1.3-1,2.3-2.3,2.3S1,14,1,12.7s1-2.3,2.3-2.3H5.7z M5.7,10.3h4.7 M5.7,10.3V5.7M10.3,10.3v2.3
+                c0,1.3,1,2.3,2.3,2.3s2.3-1,2.3-2.3s-1-2.3-2.3-2.3H10.3z M10.3,10.3V5.7 M10.3,5.7H5.7 M10.3,5.7V3.3c0-1.3,1-2.3,2.3-2.3
+                S15,2,15,3.3s-1,2.3-2.3,2.3H10.3z M5.7,5.7V3.3C5.7,2,4.6,1,3.3,1S1,2,1,3.3s1,2.3,2.3,2.3H5.7z"
+              />
+            </svg>
+            <small class="keyboard__key-line keyboard__key-line--small keyboard__key-line--br">命令</small>
+          </span>
+        </button>
+
+        <button class="keyboard__key keyboard__key--wide" type="button" data-key="a" title="上一张 (A)">
+          <span class="keyboard__key-lines">
+            <span class="keyboard__key-line">A</span>
+            <small class="keyboard__key-hint">上一张</small>
+          </span>
+        </button>
+
+        <button class="keyboard__key keyboard__key--wide" type="button" data-key="d" title="下一张 (D)">
+          <span class="keyboard__key-lines">
+            <span class="keyboard__key-line">D</span>
+            <small class="keyboard__key-hint">下一张</small>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
+
